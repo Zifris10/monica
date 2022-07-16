@@ -1,0 +1,49 @@
+{
+  "name": "monica",
+  "version": "1.0.0",
+  "description": "Representaciones artísticas",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server/server",
+    "lint": "eslint server/",
+    "migrate": "npx sequelize-cli db:migrate",
+    "pm2": "pm2 restart all",
+    "seeders": "npx sequelize-cli db:seed:all",
+    "undo": "npx sequelize-cli db:migrate:undo --name"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zifris10/monica.git"
+  },
+  "keywords": [
+    "nodejs",
+    "postgreSQL",
+    "express",
+    "sequelize",
+    "tailwindcss"
+  ],
+  "author": "Eduardo Martínez Torres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zifris10/monica/issues"
+  },
+  "homepage": "https://github.com/Zifris10/monica#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1176.0",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.7.7",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "pug": "^3.0.2",
+    "sequelize": "^6.21.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.19.0",
+    "nodemon": "^2.0.19",
+    "sequelize-cli": "^6.4.1"
+  }
+}

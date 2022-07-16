@@ -1,0 +1,14 @@
+[
+    {
+        "id": "6996880b-d945-477e-bf5d-f49036d725f3",
+        "name": "Mónica",
+        "email": "monica@gmail.com",
+        "password": "$2b$10$/WfDRCFT8axYhGniZgMzkOU9aZpx6iHOeMPpQUhIJAoLZqm//k.4K"
+    },
+    {
+        "id": "54e4739c-b018-4a30-a088-caf389b40f07",
+        "name": "Miguel",
+        "email": "miguel@gmail.com",
+        "password": "$2b$10$/WfDRCFT8axYhGniZgMzkOU9aZpx6iHOeMPpQUhIJAoLZqm//k.4K"
+    }
+]
