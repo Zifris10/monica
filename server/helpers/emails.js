@@ -10,10 +10,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 const urlsImages = {
-    avidosLogo: 'https://kuneapp.s3.us-west-1.amazonaws.com/emails/logoAvidos.png',
-    kuneLogo: 'https://kuneapp.s3.us-west-1.amazonaws.com/emails/logoKune.png',
-    android: 'https://kuneapp.s3.us-west-1.amazonaws.com/emails/android.png',
-    ios: 'https://kuneapp.s3.us-west-1.amazonaws.com/emails/ios.png'
+    logo: 'https://firebasestorage.googleapis.com/v0/b/titanapp-1515b.appspot.com/o/logo.png?alt=media&token=2efe9e5a-99d0-40a0-b2c9-cf00f9ac0cc1'
 };
 
 const emailErrorQuery = (query, values, error) => {
@@ -49,6 +46,22 @@ const emailForgotPassword = async (data) => {
     }
 };
 
+const emailUpdatePassword = async (data) => {
+    try {
+        data.imagesEmail = urlsImages;
+        const pug = convertPugFile('emails/emailUpdatePassword.pug', data);
+        const mailOptions = {
+            to: data.user.email,
+            subject: 'Contraseña actualizada',
+            html: pug.html
+        };
+        const send = await sendMail(mailOptions);
+        return send;
+    } catch (error) {
+        return { code: 500, error: 'Lo sentimos, pero ocurrió un error al intentar enviar el email.' };
+    }
+};
+
 const sendMail = async (mailOptions) => {
     try {
         mailOptions.from = '"Representaciones Artísticas no-reply@kuneapp.com"';
@@ -61,5 +74,6 @@ const sendMail = async (mailOptions) => {
 
 module.exports = {
     emailErrorQuery,
-    emailForgotPassword
+    emailForgotPassword,
+    emailUpdatePassword
 };

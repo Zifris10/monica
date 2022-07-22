@@ -19,8 +19,7 @@
     "nodejs",
     "postgreSQL",
     "express",
-    "sequelize",
-    "tailwindcss"
+    "sequelize"
   ],
   "author": "Eduardo Martínez Torres",
   "license": "ISC",

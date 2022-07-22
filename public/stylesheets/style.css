@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
+body {
+    font-family: 'Poppins', sans-serif !important;
+    height:100vh;
+    margin:0;
+    display:flex; 
+    flex-direction:column; 
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.color-azul {
+    color: #4E52F5;
+}
+.color-azul:hover {
+    color: #4E52F5;
+}
+.bg-azul {
+    background-color: #4E52F5 !important;
+}
+.menu-links:hover {
+    background-color: #4E52F5;
+}
+.bg-menu-link {
+    background-color: #4E52F5;
+}
+.form-control, .form-select {
+    background-color: #F7F9FB;
+    border-radius: 10px;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.1rem rgba(78, 82, 245, 1);
+}
+.input-group-text {
+    background-color: #F7F9FB;
+}
+.size-input-button {
+    height: 50px;
+}
+.size-off-canvas {
+    width: 250px;
+}
+.font-25 {
+    font-size: 25px;
+}
+.font-20 {
+    font-size: 20px;
+}
+.font-17 {
+    font-size: 17px;
+}
+.font-16 {
+    font-size: 16px;
+}
+.font-15 {
+    font-size: 15px;
+}
+.font-14 {
+    font-size: 14px;
+}
+textarea {
+    resize: none;
+}
+.text-truncate-table {
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    max-width:1px;
+}
+.bg-chat-usuario {
+    background-color: #F3F6F9;
+}
+.bg-chat-admin {
+    background-color: #EAEDFF;
+}
+.radius-10 {
+    border-radius: 10px;
+}
+.div-chat-report {
+    height: 500px;
+}
+#divPDF {
+    width: auto;
+    height: auto;
+    overflow: auto;
+    background: #333;
+    text-align: center;
+    border: solid 3px;
+}
+.center-align-select {
+    text-align-last: center !important;
+}
+.fc-button-primary {
+    background-color: #4E52F5 !important;
+    height: 50px !important;
+    border: none !important;
+}
+.bg-verde-calendario {
+    background-color: #EEFDF2;
+}
+.bg-amarillo-calendario {
+    background-color: #FFFBED;
+}
+.dropdown-filtros-reservaciones {
+    width: 400px !important;
+    box-shadow: 0 6px 12px 0 rgba(72,86,155,0.09);
+}
+.size-detail-condominium {
+    height: auto !important;
+    max-height: 600px !important;
+}

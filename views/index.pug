@@ -3,113 +3,36 @@ html(lang='es')
     head
         meta(charset='utf-8')      
         meta(name='viewport' content='width=device-width, initial-scale=1')
-        link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css')
         link(rel='stylesheet' href='bootstrap/css/bootstrap.min.css')
         link(rel='stylesheet' href='stylesheets/index.css')
-        link(rel='icon' href='images/logo.jpeg')
+        link(rel='icon' href='images/logo.png')
         title Iniciar sesión
     body
-        img.img-fluid.mt-4(src='images/logo.jpeg' width=200)
-        //-.container
-            img.img-fluid.mt-4(src='images/logoNuevo.png' width=120)
-            #divIniciarSesion.mb-3
-                .row.mt-3.mb-3
-                    .col-12.text-center
-                        span.font-36.fw-bold ¡Bienvenido a Kune!
-                .row
-                    .col-12
-                        p.font-21 VIVIR MEJOR EN CONDOMINIO
-                .row
-                    .col-12.col-sm-12.col-md-8.col-lg-8.col-xl-8.col-xxl-8.text-center
-                        img.img-fluid.mb-3(src='images/imgPrincipal.png')
-                    .col-12.col-sm-12.col-md-4.col-lg-4.col-xl-4.col-xxl-4#divSesion
-                        p.font-26.fw-bold Iniciar Sesión
-                        .input-group.mb-3
-                            span.input-group-text.border-0
-                                i.fa-solid.fa-envelope.ms-2.text-secondary
-                            input.form-control.border-0#correoIniciar(placeholder='Correo' type='text')
-                        .input-group
-                            span.input-group-text.border-0
-                                i.fa-solid.fa-key.ms-2.text-secondary
-                            input.form-control.border-0#passIniciar(placeholder='Contraseña' type='password')
-                        .row
-                            .col-12.text-end.mt-3
-                                a.color-azul.font-15.cursor-pointer(onclick='cambiarVentanaOlvidePass("olvide")') Olvidé la contraseña
-                            .col-12.mt-4
-                                button#btnIniciarSesion.btn.btn-login.bg-azul.text-white.fw-bold(onclick='iniciarSesion()') INICIAR SESIÓN
-                            .col-12.mt-3.text-center
-                                a.text-dark.font-17.cursor-pointer(onclick='cambiarVentana("crear")') Crear cuenta
-                    .col-12.col-sm-12.col-md-4.col-lg-4.col-xl-4.col-xxl-4.d-none#divRecuperarPass
-                        p.font-26.fw-bold Recuperar contraseña
-                        .input-group.mb-3
-                            span.input-group-text.border-0
-                                i.fa-solid.fa-envelope.ms-2.text-secondary
-                            input.form-control.border-0#correoRecuperar(placeholder='Correo' type='text')
-                        .row
-                            .col-12.mt-3
-                                button#btnRecuperarPass.btn.btn-login.bg-azul.text-white.fw-bold(onclick='olvideContrasena()') RECUPERAR CONTRASEÑA
-                            .col-12.mt-3.text-center
-                                a.text-dark.font-17.cursor-pointer(onclick='cambiarVentanaOlvidePass("iniciar")') Iniciar sesión
-            #divCrearCuenta.mb-5.d-none
-                .row.mt-3.mb-3
-                    .col-12.text-center
-                        span.font-36.fw-bold Crea tu cuenta demo por 30 días
-                .row
-                    .col-12
-                        p.font-21.fw-bold Usuario
-                .row
-                    .col-md-6.mb-3
-                        .input-group
-                            span.input-group-text.border-0.bg-transparente
-                                i.fa-solid.fa-user.mx-4.text-secondary
-                            input.form-control.border-0#nombreRegistro(placeholder='Nombre' type='text')
-                    .col-md-6.mb-3
-                        .input-group
-                            span.input-group-text.border-0.bg-transparente
-                                i.fa-solid.fa-phone-alt.mx-4.text-secondary
-                            input.form-control.border-0#telefonoRegistro(placeholder='Teléfono' type='text')
-                    .col-md-6.mb-3
-                        .input-group
-                            span.input-group-text.border-0.bg-transparente
-                                i.fa-solid.fa-envelope.mx-4.text-secondary
-                            input.form-control.border-0#correoRegistro(placeholder='Correo' type='text')
-                    .col-md-6.mb-3
-                        .input-group
-                            span.input-group-text.border-0.bg-transparente
-                                i.fa-solid.fa-key.mx-4.text-secondary
-                            input.form-control.border-0#passRegistro(placeholder='Contraseña' type='password')
-                    .col-md-6.mb-3
-                        .input-group
-                            span.input-group-text.border-0.bg-transparente
-                                i.fa-solid.fa-key.mx-4.text-secondary
-                            input.form-control.border-0#passRegistroConfirmar(placeholder='Confirmar contraseña' type='password')
-                .row.mt-3
-                    .col-12
-                        p.font-21.fw-bold Condominio
-                .row
-                    .col-md-6.mb-3
-                        .input-group
-                            span.input-group-text.border-0.bg-transparente
-                                i.fa-solid.fa-city.mx-4.text-secondary
-                            input.form-control.border-0#condominioRegistro(placeholder='Nombre del condominio' type='text')
-                    .col-md-6.mb-3
-                        .input-group
-                            span.input-group-text.border-0.bg-transparente
-                                i.fa-solid.fa-house-chimney.mx-4.text-secondary
-                            input.form-control.border-0#aproximadoCasasRegistro(placeholder='Número aproximado de casas' type='text')
-                .row
-                    .col-12
-                        span.font-15
-                            |Al crear tu cuenta aceptas los 
-                            a.color-azul(href='#' target='_blank') Términos y condiciones.
-                    .col-12.col-sm-12.col-md-6.col-lg-4.col-xl-4.col-xxl-4.mt-4
-                        button#btnCrearCondominio.btn.btn-login.bg-azul.text-white.fw-bold(onclick='registrarCondominio()') CREAR CUENTA
-                .row.mt-3
-                    .col-12.col-sm-12.col-md-6.col-lg-4.col-xl-4.col-xxl-4.text-center
-                        a.text-dark.font-17.cursor-pointer(onclick='cambiarVentana("inicio")') Iniciar Sesión
-        //-script(src='jquery/jquery-3.6.0.slim.min.js')
-        //-script(src='bootstrap/js/bootstrap.min.js')
-        //-script(src='axios/axios.min.js')
-        //-script(src='javascripts/funcionesGenerales.js')
-        //-script(src='toastify/toastify.js')
-        //-script(src='javascripts/index.js')
+        .container
+            .myForm.px-4.shadow#divIniciarSesion
+                .text-center.mb-3
+                    img.mt-3(src='images/logo.png' width=150)
+                .mb-4
+                    label.form-label.text-white(for='correoLogin') Correo
+                    input.form-control.input-style.text-secondary#correoLogin(type='text' placeholder='Correo' autocomplete='off')
+                .mb-2
+                    label.form-label.text-white(for='passLogin') Contraseña
+                    input.form-control.input-style.text-secondary#passLogin(type='password' placeholder='Contraseña' autocomplete='off')
+                .text-end.mb-5
+                    a.cursor-pointer.text-white(onclick="cambiarVentana('olvide')") ¿Olvidaste tu contraseña?
+                button.btn.btn-iniciar-sesion.col-12.text-white.mb-3(onclick='iniciarSesion()') Iniciar Sesión
+            .myForm.px-4.shadow#divOlvidePass
+                .text-center.mb-3
+                    img.mt-3(src='images/logo.png' width=150)
+                .mb-5
+                    label.form-label.text-white(for='correoOlvidePass') Correo
+                    input.form-control.input-style.text-secondary#correoOlvidePass(type='text' placeholder='Correo' autocomplete='off')
+                button.btn.btn-iniciar-sesion.col-12.text-white.mb-3(onclick='olvideContrasena()') Enviar correo
+                .text-center.mb-3
+                    a.cursor-pointer.text-white(onclick="cambiarVentana('iniciar')") Iniciar sesión
+        script(src='jquery/jquery-3.6.0.min.js')
+        script(src='bootstrap/js/bootstrap.min.js')
+        script(src='axios/axios.min.js')
+        script(src='sweetalert/sweetalert2.all.min.js')
+        script(src='javascripts/funcionesGenerales.js')
+        script(src='javascripts/index.js')
