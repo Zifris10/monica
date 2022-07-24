@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { superAdminFindOne } = require('../controllers/superAdminsController');
 
 const tokensGenerateNew = (data, expiresIn) => {
     const token = jwt.sign(data, process.env.JWT_SEED, {
@@ -18,9 +19,9 @@ const tokensVerifyExpireForgotPassword = (token) => {
 
 const tokensVerifyExpireSuperAdmin = async (req, res, next) => {
     try {
-        const { superAdminsFindOne } = require('../controllers/superAdminsController');
         const { authorization } = req.headers;
         const { idUser } = jwt.verify(authorization, process.env.JWT_SEED);
+        const { usersFindOne } = require('../controllers/usersController');
         const dataSuperAdmin = {
             where: {
                 idUser,
@@ -28,9 +29,22 @@ const tokensVerifyExpireSuperAdmin = async (req, res, next) => {
             },
             attributes: ['id']
         };
-        const getSuperAdmin = await superAdminsFindOne(dataSuperAdmin);
-        if(getSuperAdmin.code === 200) {
+        const dataUser = {
+            where: {
+                id: idUser,
+                deleted: false
+            },
+            attributes: ['name', 'email']
+        };
+        const [ getSuperAdmin, getUser ] = await Promise.all([
+            superAdminFindOne(dataSuperAdmin),
+            usersFindOne(dataUser)
+        ]);
+        if(getSuperAdmin.code === 200 && getUser.code === 200) {
+            const { user } = getUser;
             req.body.idSuperAdmin = idUser;
+            req.body.emailSuperAdmin = user.email;
+            req.body.nameSuperAdmin = user.name;
             next();
         } else {
             res.send({ code: 401 });

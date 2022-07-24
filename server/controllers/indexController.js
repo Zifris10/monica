@@ -3,15 +3,7 @@ const { validateEmpty, validateEmail } = require('../helpers/validations');
 const { tokensGenerateNew, tokensVerifyExpireForgotPassword } = require('../helpers/jwt');
 const { comparePasswordBcrypt } = require('../helpers/bcrypt');
 const { usersFindOne } = require('./usersController');
-
-const loginViewSuperAdmin = (req, res) => {
-    try {
-        const pug = convertPugFile('index.pug');
-        res.status(200).send(pug.html);
-    } catch (error) {
-        res.status(500).send({ error: 'Ocurrió un error al intentar renderizar el archivo.' });
-    }
-};
+const { superAdminFindOne } = require('./superAdminsController');
 
 const verifyTokenForgotPassword = (req, res) => {
     try {
@@ -26,7 +18,6 @@ const verifyTokenForgotPassword = (req, res) => {
 
 const superAdminLogin = async (req, res) => {
     try {
-        console.log(req.body);
         const { email, password } = req.body;
         if(validateEmpty(email) === false) return res.status(400).send({ code: 400, error: 'El correo del usuario no puede estar vacío.' });
         if(validateEmail(email) === false) return res.status(400).send({ code: 400, error: 'El correo del usuario no tiene un formato válido de tipo correo.' });
@@ -42,15 +33,22 @@ const superAdminLogin = async (req, res) => {
         if(getUser.code === 200) {
             const comparePasswords = comparePasswordBcrypt(password, getUser.user.password);
             if(comparePasswords.code === 200) {
-                const getCondominiums = await administratorsGetCondominiums(getUser.user.id);
-                if(getCondominiums.code === 200 && getCondominiums.data.length) {
+                const dataSuperAdmin = {
+                    where: {
+                        idUser: getUser.user.id,
+                        deleted: false
+                    },
+                    attributes: ['id']
+                };
+                const getSuperAdmin = await superAdminFindOne(dataSuperAdmin);
+                if(getSuperAdmin.code === 200) {
                     const dataToken = {
                         idUser: getUser.user.id
                     };
                     const token = tokensGenerateNew(dataToken, '24h');
-                    res.status(token.code).send(token);
+                    res.status(200).send({ code: 200, token });
                 } else {
-                    res.status(401).send({ code: 401, error: 'No tienes permisos para ingresar a este sistema.' });
+                    res.status(getSuperAdmin.code).send(getSuperAdmin);
                 }
             } else {
                 res.status(comparePasswords.code).send(comparePasswords);
@@ -64,7 +62,6 @@ const superAdminLogin = async (req, res) => {
 };
 
 module.exports = {
-    loginViewSuperAdmin,
     superAdminLogin,
     verifyTokenForgotPassword
 };

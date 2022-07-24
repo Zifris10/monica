@@ -1,0 +1,66 @@
+doctype
+html(lang='es')
+    head
+        meta(charset='utf-8')      
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css')
+        link(rel='stylesheet' href='bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet' href='stylesheets/style.css')
+        link(rel='icon' href='images/logo.png')
+        title Representaciones Artísticas
+    body.bg-negro(onhashchange='obtenerHash()')
+        nav.navbar.navbar-expand-lg.bg-negro-light.shadow
+            .container-fluid
+                a.navbar-brand(data-bs-toggle='offcanvas' href='#offCanvasSidenav')
+                    i.fa-solid.fa-bars.font-20.text-white
+                .d-flex
+                    a.font-17.text-white#nombreNavbar(data-bs-toggle='offcanvas' href='#offCanvasPerfil')
+        .offcanvas.offcanvas-end#offCanvasPerfil(tabindex='-1')
+            .offcanvas-body.bg-negro-light.px-3
+                .text-center.mb-5
+                    img.rounded-circle.mt-3(src='images/logo.png' width=150 height=150)
+                .mb-4
+                    label.form-label.text-white(for='nombrePerfil') Nombre
+                    input.form-control.input-style.text-secondary#nombrePerfil(type='text' placeholder='Nombre')
+                .mb-5
+                    label.form-label.text-white(for='emailPerfil') Correo
+                    input.form-control.input-style.text-secondary#emailPerfil(type='text' placeholder='Correo')
+                .mb-3
+                    button.btn.bg-verde.col-12.text-white.size-input-button(onclick='actualizarPerfil()') ACTUALIZAR
+        .offcanvas.offcanvas-start.size-off-canvas#offCanvasSidenav(tabindex='-1')
+            .offcanvas-body.bg-negro-light
+                .text-center.mb-4
+                    img.rounded-circle.mt-3(src='images/logo.png' width=150 height=150)
+                .row.cursor-pointer.py-2.mb-1.menu-links(data-bs-dismiss='offcanvas' onclick='location.hash = this.dataset.href' data-href='#condominios' data-api='/condominiums/super-admin/render')
+                    .col-3.text-center
+                        i.fa-solid.fa-address-book.font-17.text-white
+                    .col-9
+                        span.font-15.text-white Generales
+                .row.cursor-pointer.py-2.mb-1.menu-links(data-bs-dismiss='offcanvas' onclick='location.hash = this.dataset.href' data-href='#superAdmins' data-api='/super-admins/super-admin/render')
+                    .col-3.text-center
+                        i.fa-solid.fa-users.font-17.text-white
+                    .col-9
+                        span.font-15.text-white Artistas
+                .row.cursor-pointer.py-2.mb-1.menu-links(data-bs-dismiss='offcanvas' onclick='location.hash = this.dataset.href' data-href='#usuarios' data-api='/users/super-admin/render')
+                    .col-3.text-center
+                        i.fa-solid.fa-photo-film.font-17.text-white
+                    .col-9
+                        span.font-15.text-white Fotografías
+                .row.cursor-pointer.py-2.mb-1.menu-links(data-bs-dismiss='offcanvas' onclick='location.hash = this.dataset.href' data-href='#usuarios' data-api='/users/super-admin/render')
+                    .col-3.text-center
+                        i.fa-solid.fa-dollar-sign.font-17.text-white
+                    .col-9
+                        span.font-15.text-white Cotizaciones
+                .row.cursor-pointer.py-2.mb-1.menu-links(onclick='cerrarSesion()')
+                    .col-3.text-center
+                        i.fa-solid.fa-power-off.font-17.text-white
+                    .col-9
+                        span.font-15.text-white Cerrar Sesión
+        #divContenido.container-fluid.mt-4
+        script(src='jquery/jquery-3.6.0.min.js')
+        script(src='bootstrap/js/bootstrap.min.js')
+        script(src='bootstrapLightbox/index.bundle.min.js')
+        script(src='axios/axios.min.js')
+        script(src='sweetalert/sweetalert2.all.min.js')
+        script(src='javascripts/funcionesGenerales.js')
+        script(src='javascripts/superAdmin.js')

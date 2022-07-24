@@ -27,7 +27,7 @@ const olvideContrasena = async () => {
         let data = {
             email
         }
-        let axiosPeticion = await peticionAxios('POST', '/users/web/forgot-password', data);
+        let axiosPeticion = await peticionAxios('POST', '/users/super-admin/forgot-password', data);
         if(axiosPeticion.code === 200) {
             showSwalSuccess('Revisa tu correo y da click en el enlace para poder actualizar tu contraseña.');
             cambiarVentana('iniciar');
@@ -67,7 +67,7 @@ const actualizarContrasena = async () => {
             password,
             token
         }
-        let axiosPeticion = await peticionAxios('PUT', '/users/web/update-password', data);
+        let axiosPeticion = await peticionAxios('PUT', '/users/super-admin/update-password', data);
         if(axiosPeticion.code === 200) {
             localStorage.setItem('tokenMonica', axiosPeticion.token);
             location.href = '/dashboard-super-admin#generales';

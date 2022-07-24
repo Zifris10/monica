@@ -3,8 +3,9 @@ const { validateEmpty, validateEmail, validateNotEmptySpaces } = require('../hel
 const { tokensGenerateNew, tokensVerifyExpireForgotPassword } = require('../helpers/jwt');
 const { emailForgotPassword, emailUpdatePassword } = require('../helpers/emails');
 const { convertPasswordBcrypt } = require('../helpers/bcrypt');
+const { firstLetterUpperCase, allLowerCaseLetters } = require('../helpers/upperLowerCase');
 
-const usersForgotPassword = async (req, res) => {
+const usersSuperAdminForgotPassword = async (req, res) => {
     try {
         const { email } = req.body;
         if(validateEmpty(email) === false) return res.status(400).send({ code: 400, error: 'El correo del usuario no puede estar vacío.' });
@@ -37,7 +38,7 @@ const usersForgotPassword = async (req, res) => {
     }
 };
 
-const usersUpdatePassword = async (req, res) => {
+const usersSuperAdminUpdatePassword = async (req, res) => {
     try {
         const { password, token } = req.body;
         if(validateEmpty(password) === false) return res.status(400).send({ code: 400, error: 'La contraseña no puede estar vacía.' });
@@ -84,11 +85,44 @@ const usersUpdatePassword = async (req, res) => {
     }
 };
 
+const usersSuperAdminGet = async (req, res) => {
+    try {
+        const { emailSuperAdmin, nameSuperAdmin } = req.body;
+        res.status(200).send({ code: 200, email: emailSuperAdmin, name: nameSuperAdmin });
+    } catch (error) {
+        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor.' });
+    }
+};
+
+const usersSuperAdminUpdate = async (req, res) => {
+    try {
+        const { idSuperAdmin, name, email } = req.body;
+        if(validateEmpty(name) === false) return res.status(400).send({ code: 400, error: 'El nombre no puede estar vacío.' });
+        if(validateEmpty(email) === false) return res.status(400).send({ code: 400, error: 'El correo no puede estar vacío.' });
+        if(validateEmail(email) === false) return res.status(400).send({ code: 400, error: 'El correo no tiene un formato válido de tipo correo.' });
+        const nameUser = firstLetterUpperCase(name);
+        const emailUser = allLowerCaseLetters(email);
+        const data = {
+            name: nameUser,
+            email: emailUser
+        };
+        const where = {
+            where: {
+                id: idSuperAdmin
+            }
+        };
+        const update = await usersUpdate(data, where);
+        res.status(update.code).send(update);
+    } catch (error) {
+        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor de Kune.' });
+    }
+};
+
 const usersFindOne = async (data) => {
     try {
         const user = await Usuarios.findOne(data);
         if(user) return { code: 200, user };
-        return { code: 404, error: 'Usuario no encontrado.' };
+        return { code: 404, error: 'Lo sentimos pero no hemos logrado encontrar el usuario.' };
     } catch (error) {
         return { code: 500, error: 'Ocurrió un error interno en el servidor.' };
     }
@@ -106,6 +140,8 @@ const usersUpdate = async (data, where) => {
 
 module.exports = {
     usersFindOne,
-    usersForgotPassword,
-    usersUpdatePassword
+    usersSuperAdminForgotPassword,
+    usersSuperAdminUpdatePassword,
+    usersSuperAdminGet,
+    usersSuperAdminUpdate
 };
