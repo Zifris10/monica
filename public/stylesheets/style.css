@@ -49,28 +49,6 @@ body {
 .bg-menu-link {
     background-color: #1AA79C;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-.font-25 {
-    font-size: 25px;
-}
-
-.font-16 {
-    font-size: 16px;
-}
-.font-14 {
-    font-size: 14px;
-}
 textarea {
     resize: none;
 }
@@ -79,46 +57,4 @@ textarea {
     text-overflow:ellipsis;
     overflow: hidden;
     max-width:1px;
-}
-.bg-chat-usuario {
-    background-color: #F3F6F9;
-}
-.bg-chat-admin {
-    background-color: #EAEDFF;
-}
-.radius-10 {
-    border-radius: 10px;
-}
-.div-chat-report {
-    height: 500px;
-}
-#divPDF {
-    width: auto;
-    height: auto;
-    overflow: auto;
-    background: #333;
-    text-align: center;
-    border: solid 3px;
-}
-.center-align-select {
-    text-align-last: center !important;
-}
-.fc-button-primary {
-    background-color: #4E52F5 !important;
-    height: 50px !important;
-    border: none !important;
-}
-.bg-verde-calendario {
-    background-color: #EEFDF2;
-}
-.bg-amarillo-calendario {
-    background-color: #FFFBED;
-}
-.dropdown-filtros-reservaciones {
-    width: 400px !important;
-    box-shadow: 0 6px 12px 0 rgba(72,86,155,0.09);
-}
-.size-detail-condominium {
-    height: auto !important;
-    max-height: 600px !important;
 }
