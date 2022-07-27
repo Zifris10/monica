@@ -126,8 +126,3 @@ const renderLightbox = (clase) => {
         lightbox.show();
     }));
 }
-
-const primerLetraMayuscula = (palabra) => {
-    let upperCase = palabra.charAt(0).toUpperCase() + palabra.slice(1);
-    return upperCase;
-}

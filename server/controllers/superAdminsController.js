@@ -1,5 +1,6 @@
 const SuperAdmins = require('../models/SuperAdmins');
 const { convertPugFile } = require('../helpers/pug');
+const { databaseQuery } = require('../helpers/postgresql');
 
 const superAdminLoginView = (req, res) => {
     try {
@@ -29,8 +30,23 @@ const superAdminFindOne = async (data) => {
     }
 };
 
+const superAdminGetAll = async () => {
+    try {
+        const query = `SELECT SU.id, US.name, US.email
+        FROM monica."SuperAdmins" SU
+        INNER JOIN monica."Usuarios" US ON SU."idUser" = US.id
+        WHERE SU.deleted = $1 AND US.deleted = $1`;
+        const values = [false];
+        const response = await databaseQuery(query, values);
+        return response;
+    } catch (error) {
+        return { code: 500, error: 'Ocurrió un error interno en el servidor.' };
+    }
+};
+
 module.exports = {
     superAdminLoginView,
     superAdminFindOne,
-    superAdminDashboard
+    superAdminDashboard,
+    superAdminGetAll
 };

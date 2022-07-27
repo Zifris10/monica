@@ -63,5 +63,6 @@ const generalsFindOne = async (data) => {
 
 module.exports = {
     generalsSuperAdminRender,
-    generalsSuperAdminUpdate
+    generalsSuperAdminUpdate,
+    generalsFindOne
 };

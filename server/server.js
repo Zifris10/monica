@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./cron-jobs/cronJobs');
 const path = require('path');
 const express = require('express');
 const fileUpload = require('express-fileupload');

@@ -1,0 +1,105 @@
+doctype
+html(lang='es')
+    head
+        meta(charset='utf-8')      
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        link(rel='stylesheet' href='bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet' href='stylesheets/principal.css')
+        link(rel='icon' href='images/logo.png')
+        title Representaciones Artísticas
+    body
+        nav.navbar.navbar-expand-lg.bg-white.shadow-sm.mb-4
+            .container-fluid
+                a.navbar-brand(data-bs-toggle='offcanvas' href='#offCanvasSidenav')
+                    img(src='images/logo.png' width=50)
+                .d-flex
+                    a.font-17.text-dark#nombreNavbar(data-bs-toggle='offcanvas' href='#offCanvasPerfil')
+        .container.mb-5
+            .row
+                .col-12.text-center
+                    h3.fw-bold ¿Quiénes somos?
+                .col-12
+                    img.float-end(src='images/logo.png' width=250)
+                    - let splitWelcome = generals.welcome.split('\n')
+                    p
+                        each val in splitWelcome
+                            | #{val}
+                            br
+        .container.mb-5
+            .row
+                .col-12.text-center.mt-5.mb-4
+                    h3.fw-bold Artístas
+                each val in artists
+                    .col-6.col-sm-6.col-md-4.col-lg-4.col-xl-3.col-xxl-3.mb-3
+                        .card.border-0.text-center.shadow-card
+                            a.lightbox-toggle-multimedia(href=val.image data-gallery='gallery-artistas')
+                                img.card-img-top.cursor-pointer(src=val.image)
+                            .card-body #{val.name}
+        .container.mb-5
+            .row
+                .col-12.text-center.mt-5.mb-4
+                    h3.fw-bold.mt-3 Eventos
+                each val in multimedia
+                    .col-6.col-sm-6.col-md-4.col-lg-4.col-xl-3.col-xxl-3.mb-3
+                        .card.border-0.text-center.shadow-card
+                            a.lightbox-toggle-multimedia(href=val.image data-gallery='example-gallery')
+                                img.card-img-top.cursor-pointer(src=val.image)
+        .container.mb-5
+            .row
+                .col-12.text-center
+                    h3.fw-bold.mt-5 Ubicación
+                .col-12.mb-5
+                    iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3734.1336692702002!2d-103.39831308507411!3d20.623407686219355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaad072f4377c92c2!2zMjDCsDM3JzI0LjMiTiAxMDPCsDIzJzQ2LjEiVw!5e0!3m2!1ses!2smx!4v1658949640453!5m2!1ses!2smx' width='100%' height='450' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade')
+        footer.bg-footer.border-top
+            .container.text-center
+                .row
+                    .col-md-6.mb-3
+                        .row
+                            .col-12
+                                p.fw-bold.mt-3 Redes sociales
+                            if generals.urlFacebook && generals.nameFacebook
+                                .col-12.mb-2
+                                    a(href=generals.urlFacebook target='_blank')
+                                        img.me-2(src='images/facebook.png' width=30 height=30)
+                                        span #{generals.nameFacebook}
+                            if generals.urlInstagram && generals.nameInstagram
+                                .col-12.mb-2
+                                    a(href=generals.urlInstagram target='_blank')
+                                        img.me-2(src='images/instagram.png' width=30 height=30)
+                                        span #{generals.nameInstagram}
+                            if generals.urlTwitter && generals.nameTwitter
+                                .col-12.mb-2
+                                    a(href=generals.urlTwitter target='_blank')
+                                        img.me-2(src='images/twitter.png' width=30 height=30)
+                                        span #{generals.nameTwitter}
+                            if generals.urlYoutube && generals.nameYoutube
+                                .col-12.mb-2
+                                    a(href=generals.urlYoutube target='_blank')
+                                        img.me-2(src='images/youtube.png' width=30 height=30)
+                                        span #{generals.nameYoutube}
+                            if generals.urlTiktok && generals.nameTiktok
+                                .col-12.mb-2
+                                    a(href=generals.urlTiktok target='_blank')
+                                        img.me-2(src='images/tiktok.png' width=30 height=30)
+                                        span #{generals.nameTiktok}
+                    .col-md-6.mb-3
+                        .row
+                            .col-12
+                                p.fw-bold.mt-3 Contacto
+                            .col-12.mb-2
+                                img.me-2(src='images/user.png' width=30 height=30)
+                                span #{generals.nameContact}
+                            .col-12.mb-2
+                                img.me-2(src='images/whatsapp.png' width=30 height=30)
+                                span #{generals.whatsappContact}
+                            .col-12.mb-2
+                                img.me-2(src='images/gmail.png' width=30 height=30)
+                                span #{generals.emailContact}
+                    .col-12.border-top
+                        p.mt-3.text-secondary Todos los derechos reservados #{new Date().getFullYear()}
+        script(src='axios/axios.min.js')
+        script(src='bootstrap/js/bootstrap.min.js')
+        script(src='bootstrapLightbox/index.bundle.min.js')
+        script(src='sweetalert/sweetalert2.all.min.js')
+        script(src='javascripts/funcionesGenerales.js')
+        script(src='javascripts/principal.js')

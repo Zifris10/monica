@@ -203,5 +203,6 @@ module.exports = {
     artistsSuperAdminUpdate,
     artistsSuperAdminDelete,
     artistsSuperAdminUpdateImage,
-    artistsSuperAdminUpdateOrder
+    artistsSuperAdminUpdateOrder,
+    artistsFindAll
 };

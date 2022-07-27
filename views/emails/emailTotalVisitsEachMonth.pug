@@ -1,0 +1,52 @@
+doctype
+html(lang='es')
+    head
+        meta(charset='utf-8')      
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        title Total de visitas
+        style
+            include ./style.css
+    body.bg-body
+        br
+        br
+        .bg-white.ps-15.pe-15.margin-email
+            include ./header
+            .row.mb-25
+                .col-12.text-center
+                    p.font-20.fw-bold
+                        | ¡Hola Súper Administradores!
+                    p.font-16
+                        - let nombreMes = ''
+                        case month
+                            when 1
+                                - nombreMes = 'Enero'
+                            when 2
+                                - nombreMes = 'Febrero'
+                            when 3
+                                - nombreMes = 'Marzo'
+                            when 4
+                                - nombreMes = 'Abril'
+                            when 5
+                                - nombreMes = 'Mayo'
+                            when 6
+                                - nombreMes = 'Junio'
+                            when 7
+                                - nombreMes = 'Julio'
+                            when 8
+                                - nombreMes = 'Agosto'
+                            when 9
+                                - nombreMes = 'Septiembre'
+                            when 10
+                                - nombreMes = 'Octubre'
+                            when 11
+                                - nombreMes = 'Noviembre'
+                            when 12
+                                - nombreMes = 'Diciembre'
+                        | Nos complace informarte que el total de visitas en el sistema
+                        br
+                        | para el mes de #{nombreMes} de #{year} fue de 
+                        span.fw-bold #{new Intl.NumberFormat('en-US').format(total)} 
+                        | visitas.
+                    br
+                    br
+        br

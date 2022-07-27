@@ -4,6 +4,9 @@ const { tokensGenerateNew, tokensVerifyExpireForgotPassword } = require('../help
 const { comparePasswordBcrypt } = require('../helpers/bcrypt');
 const { usersFindOne } = require('./usersController');
 const { superAdminFindOne } = require('./superAdminsController');
+const { generalsFindOne } = require('./generalsController');
+const { artistsFindAll } = require('./artistsController');
+const { multimediaFindAll } = require('./multimediaController');
 
 const verifyTokenForgotPassword = (req, res) => {
     try {
@@ -61,7 +64,53 @@ const superAdminLogin = async (req, res) => {
     }
 };
 
+const viewPrincipal = async (req, res) => {
+    try {
+        const dataGenerals = {
+            attributes: ['urlFacebook', 'nameFacebook', 'urlInstagram', 'nameInstagram', 'urlTwitter', 'nameTwitter', 'urlYoutube', 'nameYoutube', 'urlTiktok', 'nameTiktok', 'whatsappContact', 'nameContact', 'emailContact', 'welcome'],
+            where: {
+                id: 'b85a5ae0-a16a-403b-9ad7-8704bea8080e'
+            }
+        };
+        const dataArtists = {
+            attributes: ['name', 'image'],
+            where: {
+                deleted: false,
+                visible: true
+            },
+            order: [
+                ['order', 'ASC']
+            ]
+        };
+        const dataMultimedia = {
+            attributes: ['image'],
+            where: {
+                deleted: false
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ],
+            limit: 50
+        };
+        const [ getGenerals, getArtists, getMultimedia ] = await Promise.all([
+            generalsFindOne(dataGenerals),
+            artistsFindAll(dataArtists),
+            multimediaFindAll(dataMultimedia)
+        ]);
+        const dataPug = {
+            generals: getGenerals.generals,
+            artists: getArtists.artists,
+            multimedia: getMultimedia.multimedia
+        };
+        const pug = convertPugFile('principal.pug', dataPug);
+        res.status(200).send(pug.html);
+    } catch (error) {
+        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor.' });
+    }
+};
+
 module.exports = {
     superAdminLogin,
-    verifyTokenForgotPassword
+    verifyTokenForgotPassword,
+    viewPrincipal
 };

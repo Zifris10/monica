@@ -6,4 +6,5 @@ app.use(require('./super-admin-route'));
 app.use(require('./artists-route'));
 app.use(require('./multimedia-route'));
 app.use(require('./generals-route'));
+app.use(require('./visits-route'));
 module.exports = app;

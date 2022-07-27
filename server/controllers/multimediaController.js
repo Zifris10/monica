@@ -105,5 +105,6 @@ const multimediaUpdate = async (data, where) => {
 module.exports = {
     multimediaSuperAdminRender,
     multimediaSuperAdminAdd,
-    multimediaSuperAdminDelete
+    multimediaSuperAdminDelete,
+    multimediaFindAll
 };

@@ -62,6 +62,23 @@ const emailUpdatePassword = async (data) => {
     }
 };
 
+const emailTotalVisitsEachMonth = async (data) => {
+    try {
+        data.imagesEmail = urlsImages;
+        const pug = convertPugFile('emails/emailTotalVisitsEachMonth.pug', data);
+        const superAdmins = data.superAdmins.map(item => item.email);
+        const mailOptions = {
+            to: superAdmins,
+            subject: 'Total de visitas',
+            html: pug.html
+        };
+        const send = await sendMail(mailOptions);
+        return send;
+    } catch (error) {
+        return { code: 500, error: 'Lo sentimos, pero ocurrió un error al intentar enviar el email.' };
+    }
+};
+
 const sendMail = async (mailOptions) => {
     try {
         mailOptions.from = '"Representaciones Artísticas no-reply@kuneapp.com"';
@@ -75,5 +92,6 @@ const sendMail = async (mailOptions) => {
 module.exports = {
     emailErrorQuery,
     emailForgotPassword,
-    emailUpdatePassword
+    emailUpdatePassword,
+    emailTotalVisitsEachMonth
 };
