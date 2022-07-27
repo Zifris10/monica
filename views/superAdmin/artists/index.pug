@@ -1,0 +1,51 @@
+.row
+    .col-12.col-sm-12.col-md-7.col-lg-5.col-xl-4.col-xxl-4.mb-3
+        input.form-control.input-style.text-secondary.size-input-button(placeholder='Buscar por nombre' type='text' onkeyup='filtrarArtistas(this.value)')
+    .col-12.col-sm-12.col-md-5.col-lg-7.col-xl-8.col-xxl-8.mb-3.text-end
+        button.btn.bg-azul.text-white.size-input-button(data-bs-toggle='modal' data-bs-target='#modalAgregarArtista') AGREGAR
+.table-responsive
+    table.table.table-borderless.table-striped.text-center
+        thead.bg-azul.text-white.font-16
+            tr
+                th.py-3(style='min-width:70px; width:5%') Orden
+                th.py-3(style='min-width:100px; width:10%') Imagen
+                th.py-3(style='min-width:350px; width:70%') Nombre
+                th.py-3(style='min-width:100px; width:10%') Visible
+                th.py-3(style='min-width:60px; width:5%')
+        tbody.font-14#tbodyArtistas
+            each val in artists
+                tr(id=val.id)
+                    th.pt-3
+                        i.fa-solid.fa-sort.text-body.cursor-pointer.handle-artistas
+                    th
+                        a.lightbox-toggle-artista(href=val.image id='lightboxImagenArtista'+val.id)
+                            img.rounded-circle(src=val.image width=45 height=45 id='imagenArtista'+val.id)
+                        label(for='inputImagenArtista'+val.id)
+                            i.fa-solid.fa-pen.text-body.cursor-pointer.ms-3
+                        input.d-none(id='inputImagenArtista'+val.id type='file' accept='.jpg, .jpeg, .png' onchange='actuallizarImagenArtista(this,"'+val.id+'")')
+                    th
+                        input.form-control.text-body.input-style.text-center.size-input-button.bg-transparent.border.border-0.nombre-artista(type='text' value=val.name placeholder='Nombre' autocomplete='off' onchange='actualizarArtista("'+val.id+'",this.value,"name")')
+                    th.pt-3
+                        input.form-check-input(type='checkbox' checked=val.visible onchange='actualizarArtista("'+val.id+'",this.checked,"visible")')
+                    th.pt-3
+                        i.fa-solid.fa-trash.text-danger.cursor-pointer(onclick='eliminarArtista("'+val.id+'","'+val.name+'")')
+.modal.fade#modalAgregarArtista(tabindex='-1' aria-hidden='true' data-bs-backdrop='static' data-bs-keyboard='false')
+    .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
+        .modal-content
+            .modal-header.bg-azul.border-0
+                h5.text-white.modal-title Nuevo Artísta
+                i.fas.fa-times.text-white.cursor-pointer.font-25(onclick='limpiarModalArtista()')
+            .modal-body
+                .mb-3
+                    label.form-label(for='nombreArtista') Nombre
+                    input.form-control.input-style.text-secondary.size-input-button#nombreArtista(type='text' placeholder='Nombre' autocomplete='off')
+                .mb-4
+                    label.form-label(for='imagenArtista') Imagen
+                    .input-group
+                        label.input-group-text.cursor-pointer.bg-azul.border-0(for='imagenArtista')
+                            i.fa-solid.fa-camera.mx-2.text-white
+                        input.form-control.input-style.text-secondary.size-input-button#inputImagenArtista(type='text' placeholder='Imagen' readOnly)
+                    .form-text La imagen no debe pesar más de 1MB.
+                    input.d-none#imagenArtista(type='file' accept='.jpg, .jpeg, .png' onchange='setNombreArchivoInput(this,"inputImagenArtista")')
+                .text-end
+                    button.btn.bg-azul.text-white.size-input-button(onclick='agregarArtista()') AGREGAR

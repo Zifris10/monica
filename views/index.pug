@@ -9,27 +9,27 @@ html(lang='es')
         title Iniciar sesión
     body
         .container
-            .myForm.px-4.shadow#divIniciarSesion
+            .myForm.px-4.bg-white#divIniciarSesion
                 .text-center.mb-3
                     img.mt-3(src='images/logo.png' width=150)
                 .mb-4
-                    label.form-label.text-white(for='correoLogin') Correo
+                    label.form-label(for='correoLogin') Correo
                     input.form-control.input-style.text-secondary#correoLogin(type='text' placeholder='Correo' autocomplete='off')
                 .mb-2
-                    label.form-label.text-white(for='passLogin') Contraseña
+                    label.form-label(for='passLogin') Contraseña
                     input.form-control.input-style.text-secondary#passLogin(type='password' placeholder='Contraseña' autocomplete='off')
                 .text-end.mb-5
-                    a.cursor-pointer.text-white(onclick="cambiarVentana('olvide')") ¿Olvidaste tu contraseña?
+                    a.cursor-pointer(onclick="cambiarVentana('olvide')") ¿Olvidaste tu contraseña?
                 button.btn.btn-iniciar-sesion.col-12.text-white.mb-3(onclick='iniciarSesion()') Iniciar Sesión
-            .myForm.px-4.shadow#divOlvidePass
+            .myForm.px-4.bg-white#divOlvidePass
                 .text-center.mb-3
                     img.mt-3(src='images/logo.png' width=150)
                 .mb-5
-                    label.form-label.text-white(for='correoOlvidePass') Correo
+                    label.form-label(for='correoOlvidePass') Correo
                     input.form-control.input-style.text-secondary#correoOlvidePass(type='text' placeholder='Correo' autocomplete='off')
                 button.btn.btn-iniciar-sesion.col-12.text-white.mb-3(onclick='olvideContrasena()') Enviar correo
                 .text-center.mb-3
-                    a.cursor-pointer.text-white(onclick="cambiarVentana('iniciar')") Iniciar sesión
+                    a.cursor-pointer(onclick="cambiarVentana('iniciar')") Iniciar sesión
         script(src='jquery/jquery-3.6.0.min.js')
         script(src='bootstrap/js/bootstrap.min.js')
         script(src='axios/axios.min.js')

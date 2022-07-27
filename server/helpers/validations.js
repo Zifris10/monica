@@ -29,10 +29,17 @@ const validateNotEmptySpaces = (value) => {
     return validate;
 };
 
+const validateArray = (array) => {
+    let validate = false;
+    if(Array.isArray(array) && array.length > 0) validate = true;
+    return validate;
+};
+
 module.exports = {
     validateEmpty,
     validateEmail,
     validateFileWeight,
     validateImage,
-    validateNotEmptySpaces
+    validateNotEmptySpaces,
+    validateArray
 };
