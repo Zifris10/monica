@@ -1,0 +1,92 @@
+.px-4.bg-white.shadow-card.mb-4
+    .row
+        .col-12
+            p.fw-bold.mt-3 Bienvenida
+    .row
+        .col-12.mb-3
+            textarea.form-control(rows='10' onchange='actualizarGenerales(this.value,"welcome")') #{generals.welcome}
+.px-4.bg-white.shadow-card.mb-4
+    .row
+        .col-12
+            p.fw-bold.mt-3 Redes sociales
+    .row
+        .col-md-6.mb-3
+            .row
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/facebook.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.nameFacebook placeholder='Facebook' autocomplete='off' onchange='actualizarGenerales(this.value,"nameFacebook")')
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/facebook.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.urlFacebook placeholder='Url Facebok' autocomplete='off' onchange='actualizarGenerales(this.value,"urlFacebook")')
+        .col-md-6.mb-3
+            .row
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/instagram.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.nameInstagram placeholder='Instagram' autocomplete='off' onchange='actualizarGenerales(this.value,"nameInstagram")')
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/instagram.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.urlInstagram placeholder='Url Instagram' autocomplete='off' onchange='actualizarGenerales(this.value,"urlInstagram")')
+        .col-md-6.mb-3
+            .row
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/youtube.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.nameYoutube placeholder='Youtube' autocomplete='off' onchange='actualizarGenerales(this.value,"nameYoutube")')
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/youtube.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.urlYoutube placeholder='Url Youtube' autocomplete='off' onchange='actualizarGenerales(this.value,"urlYoutube")')
+        .col-md-6.mb-3
+            .row
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/twitter.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.nameTwitter placeholder='Twitter' autocomplete='off' onchange='actualizarGenerales(this.value,"nameTwitter")')
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/twitter.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.urlTwitter placeholder='Url Twitter' autocomplete='off' onchange='actualizarGenerales(this.value,"urlTwitter")')
+        .col-md-6.mb-3
+            .row
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/tiktok.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.nameTiktok placeholder='Tiktok' autocomplete='off' onchange='actualizarGenerales(this.value,"nameTiktok")')
+                .col-12
+                    .input-group.mb-3
+                        span.input-group-text.bg-transparent.border-0
+                            img(src='images/tiktok.png' width=32 height=32)
+                        input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.urlTiktok placeholder='Url Tiktok' autocomplete='off' onchange='actualizarGenerales(this.value,"urlTiktok")')
+.px-4.bg-white.shadow-card.mb-4
+    .row
+        .col-12
+            p.fw-bold.mt-3 Contacto
+    .row
+        .col-md-6.mb-3
+            .input-group
+                span.input-group-text.bg-transparent.border-0
+                    i.fa-solid.fa-user.mx-2.text-body
+                input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.nameContact placeholder='Nombre completo' autocomplete='off' onchange='actualizarGenerales(this.value,"nameContact")')
+        .col-md-6.mb-3
+            .input-group
+                span.input-group-text.bg-transparent.border-0
+                    i.fa-solid.fa-envelope.mx-2.text-body
+                input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.emailContact placeholder='Email' autocomplete='off' onchange='actualizarGenerales(this.value,"emailContact")')
+        .col-md-6.mb-3
+            .input-group
+                span.input-group-text.bg-transparent.border-0
+                    img(src='images/whatsapp.png' width=32 height=32)
+                input.form-control.input-style.text-secondary.size-input-button(type='text' value=generals.whatsappContact placeholder='Whatsapp' autocomplete='off' onchange='actualizarGenerales(this.value,"whatsappContact")')

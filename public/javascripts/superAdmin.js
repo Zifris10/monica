@@ -43,10 +43,10 @@ const obtenerHash = async () => {
                 renderLightbox('.lightbox-toggle-multimedia');
             }
         } else {
-            //cerrarSesion();
+            cerrarSesion();
         }
     } else {
-        //cerrarSesion();
+        cerrarSesion();
     }
 }
 
@@ -83,6 +83,15 @@ const actualizarPerfil = async () => {
             showSwalError(axiosPeticion.error);
         }
     }
+}
+
+/////////////////////////////////
+////////// GENERALES ////////////
+/////////////////////////////////
+const actualizarGenerales = async (value, field) => {
+    const data = { value, field };
+    const axiosPeticion = await peticionAxios('PUT', '/generals/super-admin/update', data);
+    if(axiosPeticion.code !== 200) showSwalError(axiosPeticion.error);
 }
 
 /////////////////////////////////

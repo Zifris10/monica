@@ -4,7 +4,7 @@
 .row#divContenidoMultimedia
     each val in multimedia
         .col-12.col-sm-6.col-md-4.col-lg-4.col-xl-3.col-xxl-3.mb-3(id=val.id)
-            .card.border-0.text-center
+            .card.border-0.text-center.shadow-card
                 a.lightbox-toggle-multimedia(href=val.image)
                     img.card-img-top.cursor-pointer(src=val.image)
                 .card-body

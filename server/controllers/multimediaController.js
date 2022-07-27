@@ -55,7 +55,7 @@ const multimediaSuperAdminAdd = async (req, res) => {
 const multimediaSuperAdminDelete = async (req, res) => {
     try {
         const { idMultimedia, idSuperAdmin } = req.body;
-        if(validateEmpty(idMultimedia) === false) return res.status(400).send({ code: 400, error: 'El id de la imagen o video no puede estar vacío.' });
+        if(validateEmpty(idMultimedia) === false) return res.status(400).send({ code: 400, error: 'El id de la imagen no puede estar vacío.' });
         const data = {
             deleted: true,
             deletedBy: idSuperAdmin
