@@ -188,13 +188,13 @@
     font-weight: bold !important;
 }
 .bg-body {
-    background-color: #112940 !important;
+    background-color: #F1F3F6 !important;
 }
-.bg-body-light {
-    background: linear-gradient(149.11deg, #253A4F 0%, #182F45 100%);
+.bg-white {
+    background-color: white !important;
 }
-.bg-verde {
-    background-color: #1AA79C !important;
+.bg-azul {
+    background-color: #004BFF !important;
 }
 .color-blanco {
     color: white !important;
