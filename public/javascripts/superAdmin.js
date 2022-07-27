@@ -39,6 +39,8 @@ const obtenerHash = async () => {
             if(location.hash === '#artistas') {
                 renderLightbox('.lightbox-toggle-artista');
                 habilitarSortableArtistas();
+            } else if(location.hash === '#multimedia') {
+                renderLightbox('.lightbox-toggle-multimedia');
             }
         } else {
             //cerrarSesion();
@@ -220,4 +222,70 @@ const actualizarOrdenArtistas = async (elementos) => {
     const data = { array: arregloArtistas };
     const axiosPeticion = await peticionAxios('PUT', '/artists/super-admin/update-order', data);
     if(axiosPeticion.code !== 200) showSwalError(axiosPeticion.error);
+}
+
+/////////////////////////////////
+////////// MULTIMEDIA ///////////
+/////////////////////////////////
+const limpiarModalMultimedia = () => {
+    $('#modalAgregarMultimedia').modal('hide');
+    $('#imagenVideoMultimedia').val('');
+    $('#inputImagenVideoMultimedia').val('');
+}
+
+const agregarMultimedia = async () => {
+    let imagen = document.getElementById('imagenVideoMultimedia').files[0];
+    if(tieneDatos(imagen, 'La imagen o video')) {
+        showSwalLoading();
+        let formData = new FormData();
+        formData.append('image', imagen);
+        const axiosPeticion = await peticionAxios('POST', '/multimedia/super-admin/add', formData, true);
+        if(axiosPeticion.code === 200) {
+            const { multimedia } = axiosPeticion;
+            const timestamp = Date.now();
+            const html = `<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 mb-3" id="${multimedia.id}">
+                <div class="card border-0 text-center">
+                    <a class="clase-${timestamp}" href="${multimedia.imageVideo}">
+                        <img class="card-img-top cursor-pointer" src="${multimedia.imageVideo}">
+                    </a>
+                    <div class="card-body">
+                        <i class="fa-solid fa-trash text-danger cursor-pointer" onclick="eliminarMultimedia('${multimedia.id}')"></i>
+                    </div>
+                </div>
+            </div>`;
+            $('#divContenidoMultimedia').prepend(html);
+            limpiarModalMultimedia();
+            showSwalSuccess('Imagen agregada correctamente.');
+            renderLightbox('.clase-' + timestamp);
+        } else {
+            showSwalError(axiosPeticion.error);
+        }
+    }
+}
+
+const eliminarMultimedia = async (idMultimedia) => {
+    Swal.fire({
+        text: `¿Estas seguro de que quieres eliminar la imagen?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#000',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        allowEnterKey: false
+    }).then(async (result) => {
+        if(result.isConfirmed) {
+            showSwalLoading();
+            const data = { idMultimedia };
+            const axiosPeticion = await peticionAxios('DELETE', '/multimedia/super-admin/delete', data);
+            if(axiosPeticion.code === 200) {
+                eliminarRow(idMultimedia);
+                showSwalSuccess('Imagen eliminada correctamente.');
+            } else {
+                showSwalError(axiosPeticion.error);
+            }
+        }
+    });
 }

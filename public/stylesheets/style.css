@@ -56,3 +56,6 @@ textarea {
     overflow: hidden;
     max-width:1px;
 }
+.card {
+    box-shadow: 0 10px 30px 0 rgba(142,160,187,0.12) !important;
+}

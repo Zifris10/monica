@@ -1,0 +1,28 @@
+.row
+    .col-12.mb-3.text-end
+        button.btn.bg-azul.text-white.size-input-button(data-bs-toggle='modal' data-bs-target='#modalAgregarMultimedia') AGREGAR
+.row#divContenidoMultimedia
+    each val in multimedia
+        .col-12.col-sm-6.col-md-4.col-lg-4.col-xl-3.col-xxl-3.mb-3(id=val.id)
+            .card.border-0.text-center
+                a.lightbox-toggle-multimedia(href=val.imageVideo)
+                    img.card-img-top.cursor-pointer(src=val.imageVideo)
+                .card-body
+                    i.fa-solid.fa-trash.text-danger.cursor-pointer(onclick='eliminarMultimedia("'+val.id+'")')
+.modal.fade#modalAgregarMultimedia(tabindex='-1' aria-hidden='true' data-bs-backdrop='static' data-bs-keyboard='false')
+    .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
+        .modal-content
+            .modal-header.bg-azul.border-0
+                h5.text-white.modal-title Nueva foto o video
+                i.fas.fa-times.text-white.cursor-pointer.font-25(onclick='limpiarModalMultimedia()')
+            .modal-body
+                .mb-4
+                    label.form-label(for='imagenVideoMultimedia') Imagen / Video
+                    .input-group
+                        label.input-group-text.cursor-pointer.bg-azul.border-0(for='imagenVideoMultimedia')
+                            i.fa-solid.fa-camera.mx-2.text-white
+                        input.form-control.input-style.text-secondary.size-input-button#inputImagenVideoMultimedia(type='text' placeholder='Imagen / Video' readOnly)
+                    .form-text La imagen no debe pesar más de 1MB.
+                    input.d-none#imagenVideoMultimedia(type='file' accept='.jpg, .jpeg, .png' onchange='setNombreArchivoInput(this,"inputImagenVideoMultimedia")')
+                .text-end
+                    button.btn.bg-azul.text-white.size-input-button(onclick='agregarMultimedia()') AGREGAR

@@ -114,7 +114,7 @@ const usersSuperAdminUpdate = async (req, res) => {
         const update = await usersUpdate(data, where);
         res.status(update.code).send(update);
     } catch (error) {
-        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor de Kune.' });
+        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor.' });
     }
 };
 

@@ -82,7 +82,7 @@ const artistsSuperAdminUpdate = async (req, res) => {
         const update = await artistsUpdate(data, where);
         res.status(update.code).send(update);
     } catch (error) {
-        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor de Kune.' });
+        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor.' });
     }
 };
 
@@ -102,7 +102,7 @@ const artistsSuperAdminDelete = async (req, res) => {
         const update = await artistsUpdate(data, where);
         res.status(update.code).send(update);
     } catch (error) {
-        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor de Kune.' });
+        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor.' });
     }
 };
 
@@ -137,7 +137,7 @@ const artistsSuperAdminUpdateImage = async (req, res) => {
             res.status(fileUpload.code).send(fileUpload);
         }
     } catch (error) {
-        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor de Kune.' });
+        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor.' });
     }
 };
 
@@ -154,7 +154,7 @@ const artistsSuperAdminUpdateOrder = async (req, res) => {
         const transaction = await databaseTransaction(queryTransaction, valuesTransaction);
         res.status(transaction.code).send(transaction);
     } catch (error) {
-        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor de Kune.' });
+        res.status(500).send({ code: 500, error: 'Ocurrió un error interno en el servidor.' });
     }
 };
 
