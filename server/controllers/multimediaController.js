@@ -6,7 +6,7 @@ const { getExtensionFile, uploadFileS3 } = require('../helpers/s3');
 const multimediaSuperAdminRender = async (req, res) => {
     try {
         const dataMultimedia = {
-            attributes: ['id', 'imageVideo'],
+            attributes: ['id', 'image'],
             where: {
                 deleted: false
             },
@@ -39,7 +39,7 @@ const multimediaSuperAdminAdd = async (req, res) => {
         const fileUpload = await uploadFileS3(filePath, image);
         if(fileUpload.code === 200) {
             const data = {
-                imageVideo: fileUpload.url,
+                image: fileUpload.url,
                 createdBy: idSuperAdmin
             };
             const create = await multimediaCreate(data);

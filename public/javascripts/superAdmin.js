@@ -245,8 +245,8 @@ const agregarMultimedia = async () => {
             const timestamp = Date.now();
             const html = `<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-3 mb-3" id="${multimedia.id}">
                 <div class="card border-0 text-center">
-                    <a class="clase-${timestamp}" href="${multimedia.imageVideo}">
-                        <img class="card-img-top cursor-pointer" src="${multimedia.imageVideo}">
+                    <a class="clase-${timestamp}" href="${multimedia.image}">
+                        <img class="card-img-top cursor-pointer" src="${multimedia.image}">
                     </a>
                     <div class="card-body">
                         <i class="fa-solid fa-trash text-danger cursor-pointer" onclick="eliminarMultimedia('${multimedia.id}')"></i>

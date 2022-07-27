@@ -8,7 +8,7 @@ const Multimedia = dbSequelize.define('Multimedia', {
         primaryKey: true,
         allowNull: false
     },
-    imageVideo: {
+    image: {
         type: DataTypes.STRING(200),
         allowNull: false,
         validate: {

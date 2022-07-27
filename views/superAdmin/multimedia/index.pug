@@ -5,8 +5,8 @@
     each val in multimedia
         .col-12.col-sm-6.col-md-4.col-lg-4.col-xl-3.col-xxl-3.mb-3(id=val.id)
             .card.border-0.text-center
-                a.lightbox-toggle-multimedia(href=val.imageVideo)
-                    img.card-img-top.cursor-pointer(src=val.imageVideo)
+                a.lightbox-toggle-multimedia(href=val.image)
+                    img.card-img-top.cursor-pointer(src=val.image)
                 .card-body
                     i.fa-solid.fa-trash.text-danger.cursor-pointer(onclick='eliminarMultimedia("'+val.id+'")')
 .modal.fade#modalAgregarMultimedia(tabindex='-1' aria-hidden='true' data-bs-backdrop='static' data-bs-keyboard='false')

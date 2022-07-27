@@ -7,7 +7,7 @@ module.exports = {
                 allowNull: false,
                 primaryKey: true
             },
-            imageVideo: {
+            image: {
                 type: Sequelize.STRING(200),
                 allowNull: false
             },
