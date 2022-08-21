@@ -1,6 +1,6 @@
 const { convertPugFile } = require('./pug');
-const nodemailer = require('nodemailer');
-const transporter = nodemailer.createTransport({
+const { createTransport } = require('nodemailer');
+const transporter = createTransport({
     host: process.env.AWS_SES_HOST,
     port: parseInt(process.env.AWS_SES_PORT),
     secure: false,
@@ -11,23 +11,6 @@ const transporter = nodemailer.createTransport({
 });
 const urlsImages = {
     logo: 'https://firebasestorage.googleapis.com/v0/b/titanapp-1515b.appspot.com/o/logo.png?alt=media&token=2efe9e5a-99d0-40a0-b2c9-cf00f9ac0cc1'
-};
-
-const emailErrorQuery = (query, values, error) => {
-    const mailOptions = {
-        to: 'eduardom362@gmail.com',
-        subject: 'Error en Representaciones Artísticas.',
-        html: `<p style="font-size: 18px; font-weight: bold;">
-        Consulta SQL: ${query}
-        <br>
-        <br>
-        Valores SQL: ${values}
-        <br>
-        <br>
-        Error SQL: ${error}
-        </p>`
-    };
-    sendMail(mailOptions);
 };
 
 const emailForgotPassword = async (data) => {
@@ -90,7 +73,6 @@ const sendMail = async (mailOptions) => {
 };
 
 module.exports = {
-    emailErrorQuery,
     emailForgotPassword,
     emailUpdatePassword,
     emailTotalVisitsEachMonth

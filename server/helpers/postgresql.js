@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+const logger = require('./winston');
 
 const pool = new Pool({
     user: process.env.DATABASE_USERNAME,
@@ -15,9 +16,7 @@ const databaseQuery = async (query, values = []) => {
         client.release();
         return { code: 200, data: consulta.rows };
     } catch (error) {
-        console.log(query);
-        console.log(values);
-        console.log(error.message);
+        logger.log({ level: 'error', message: error.message, functionName: 'databaseQuery', data: { query, values } });
         client.release();
         return { code: 500 };
     }
@@ -35,9 +34,7 @@ const databaseTransaction = async (query, values) => {
         await client.query('COMMIT');
         return { code: 200 };
     } catch (error) {
-        console.log(query);
-        console.log(values);
-        console.log(error.message);
+        logger.log({ level: 'error', message: error.message, functionName: 'databaseTransaction', data: { query, values } });
         await client.query('ROLLBACK');
         return { code: 500 };
     } finally {

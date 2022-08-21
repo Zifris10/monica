@@ -9,6 +9,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-console": "error",
         "no-trailing-spaces": ["error", { "skipBlankLines": false, "ignoreComments": true }],
         "key-spacing": ["error", { "beforeColon": false }],
         "no-multi-spaces": ["error", { "ignoreEOLComments": false }],

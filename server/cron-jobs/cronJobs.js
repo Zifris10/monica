@@ -2,7 +2,8 @@ const cron = require('node-cron');
 const { Op } = require('sequelize');
 const { visitCount } = require('../controllers/visitsController');
 const { superAdminGetAll } = require('../controllers/superAdminsController');
-const { emailErrorQuery, emailTotalVisitsEachMonth } = require('../helpers/emails');
+const { emailTotalVisitsEachMonth } = require('../helpers/emails');
+const logger = require('../helpers/winston');
 
 cron.schedule('0 10 1 * *', async () => {
     try {
@@ -34,6 +35,6 @@ cron.schedule('0 10 1 * *', async () => {
             }
         }
     } catch (error) {
-        emailErrorQuery('Cron job', 'values', error.message);
+        logger.log({ level: 'error', message: error.message, functionName: 'Cron job' });
     }
 });
