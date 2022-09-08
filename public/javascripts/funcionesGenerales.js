@@ -1,7 +1,7 @@
 const tieneDatos = (value, nombreCampo) => {
     let validar = true;
     if(value === undefined || value === null || value === '') {
-        showSwalError(`${nombreCampo} está vacío.`);
+        showToastify(`${nombreCampo} está vacío.`);
         validar = false;
     }
     return validar
@@ -10,7 +10,7 @@ const tieneDatos = (value, nombreCampo) => {
 const esNumerico = (value, nombreCampo) => {
     let validar = true;
     if(isNaN(value)) {
-        showSwalError(`${nombreCampo} solo acepta números.`);
+        showToastify(`${nombreCampo} solo acepta números.`);
         validar = false;
     }
     return validar
@@ -19,7 +19,7 @@ const esNumerico = (value, nombreCampo) => {
 const tieneLogitudNecesaria = (value, nombreCampo, longitud) => {
     let validar = true;
     if(value.length != longitud) {
-        showSwalError(`${nombreCampo} debe tener solo ${longitud} números.`);
+        showToastify(`${nombreCampo} debe tener solo ${longitud} números.`);
         validar = false;
     }
     return validar
@@ -29,7 +29,7 @@ const esCorreo = (value, nombreCampo) => {
     let validar = true;
     let filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(!filter.test(value)) {
-        showSwalError(`${nombreCampo} no tiene un formato de tipo correo válido.`);
+        showToastify(`${nombreCampo} no tiene un formato de tipo correo válido.`);
         validar = false;
     }
     return validar
@@ -38,24 +38,20 @@ const esCorreo = (value, nombreCampo) => {
 const pesoArchivoCorrecto = (size, peso) => {
     let validar = true;
     if(size > peso) {
-        showSwalError('El archivo seleccionado sobrepasa el límite de peso permitido.');
+        showToastify('El archivo seleccionado sobrepasa el límite de peso permitido.');
         validar = false;
     }
     return validar
 }
 
-const showSwalError = (text) => {
-    Swal.fire({
-        title: 'ERROR',
+const showToastify = (text, background = '#E92D22') => {
+    Toastify({
         text,
-        icon: 'error',
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        allowEnterKey: false,
-        customClass: {
-            confirmButton: 'text-white bg-dark'
+        duration: 5000,
+        style: {
+            background
         }
-    });
+    }).showToast();
 }
 
 const showSwalSuccess = (text) => {

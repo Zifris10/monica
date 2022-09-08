@@ -73,15 +73,20 @@ const actualizarPerfil = async () => {
     let name = $('#nombrePerfil').val().trim();
     let email = $('#emailPerfil').val().trim();
     if(tieneDatos(name, 'El nombre') && tieneDatos(email, 'El correo') && esCorreo(email, 'El correo')) {
-        showSwalLoading();
-        const data = { name, email };
+        let btn = $('#btnActualizarPerfil');
+        btn.html('<span class="spinner-border" role="status" aria-hidden="true"></span>').prop('disabled', true);
+        const data = {
+            name,
+            email
+        };
         const axiosPeticion = await peticionAxios('PUT', '/users/super-admin/update', data);
         if(axiosPeticion.code === 200) {
             $('#nombreNavbar').text(name);
-            showSwalSuccess('Perfil actualizado correctamente.');
+            showToastify('Perfil actualizado correctamente.', '#4caf50');
         } else {
-            showSwalError(axiosPeticion.error);
+            showToastify(axiosPeticion.error);
         }
+        btn.html('ACTUALIZAR').prop('disabled', false);
     }
 }
 
@@ -89,9 +94,16 @@ const actualizarPerfil = async () => {
 ////////// GENERALES ////////////
 /////////////////////////////////
 const actualizarGenerales = async (value, field) => {
-    const data = { value, field };
+    const data = {
+        value,
+        field
+    };
     const axiosPeticion = await peticionAxios('PUT', '/generals/super-admin/update', data);
-    if(axiosPeticion.code !== 200) showSwalError(axiosPeticion.error);
+    if(axiosPeticion.code === 200) {
+        showToastify('Información actualizada correctamente.', '#4caf50');
+    } else {
+        showToastify(axiosPeticion.error);
+    }
 }
 
 /////////////////////////////////
@@ -108,7 +120,8 @@ const agregarArtista = async () => {
     let nombre = $('#nombreArtista').val();
     let imagen = document.getElementById('imagenArtista').files[0];
     if(tieneDatos(nombre, 'El nombre') && tieneDatos(imagen, 'La imagen')) {
-        showSwalLoading();
+        let btn = $('#btnAgregarArtista');
+        btn.html('<span class="spinner-border" role="status" aria-hidden="true"></span>').prop('disabled', true);
         let formData = new FormData();
         formData.append('name', nombre);
         formData.append('image', imagen);
@@ -136,50 +149,51 @@ const agregarArtista = async () => {
                     <input class="form-check-input" type="checkbox" checked onchange="actualizarArtista('${artist.id}',this.checked,'visible')">
                 </th>
                 <th class="pt-3">
-                    <i class="fa-solid fa-trash text-danger cursor-pointer" onclick="eliminarArtista('${artist.id}','${artist.name}')"></i>
+                    <i class="fa-solid fa-trash text-danger cursor-pointer" onclick="mostrarModalEliminarArtista('${artist.id}','${artist.name}')"></i>
                 </th>
             </tr>`;
             $('#tbodyArtistas').append(html);
             limpiarModalArtista();
-            showSwalSuccess('Artísta agregado correctamente.');
+            showToastify('Artísta agregado correctamente.', '#4caf50');
             renderLightbox('.clase-' + timestamp);
         } else {
-            showSwalError(axiosPeticion.error);
+            showToastify(axiosPeticion.error);
         }
+        btn.html('AGREGAR').prop('disabled', false);
     }
 }
 
 const actualizarArtista = async (idArtists, value, field) => {
-    const data = { idArtists, value, field };
+    const data = {
+        idArtists,
+        value,
+        field
+    };
     const axiosPeticion = await peticionAxios('PUT', '/artists/super-admin/update', data);
-    if(axiosPeticion.code !== 200) showSwalError(axiosPeticion.error);
+    if(axiosPeticion.code === 200) {
+        showToastify('Artísta actualizado correctamente.', '#4caf50');
+    } else {
+        showToastify(axiosPeticion.error);
+    }
 }
 
-const eliminarArtista = async (idArtists, name) => {
-    Swal.fire({
-        text: `¿Estas seguro de que quieres eliminar el artísta ${name}?`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#000',
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar',
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        allowEnterKey: false
-    }).then(async (result) => {
-        if(result.isConfirmed) {
-            showSwalLoading();
-            const data = { idArtists };
-            const axiosPeticion = await peticionAxios('DELETE', '/artists/super-admin/delete', data);
-            if(axiosPeticion.code === 200) {
-                eliminarRow(idArtists);
-                showSwalSuccess('Artísta eliminado correctamente.');
-            } else {
-                showSwalError(axiosPeticion.error);
-            }
-        }
-    });
+const mostrarModalEliminarArtista = (idArtists, name) => {
+    $('#tituloEliminar').html(`¿Estas seguro de que quieres eliminar el artísta ${name}?`,);
+    $('#btnEliminarModal').attr('onclick','eliminarArtista("'+idArtists+'")');
+    $('#modalConfirmarEliminar').modal('show');
+}
+
+const eliminarArtista = async (idArtists) => {
+    eliminarRow(idArtists);
+    const data = {
+        idArtists
+    };
+    const axiosPeticion = await peticionAxios('DELETE', '/artists/super-admin/delete', data);
+    if(axiosPeticion.code === 200) {
+        showToastify('Artísta eliminado correctamente.', '#4caf50');
+    } else {
+        showToastify(axiosPeticion.error);
+    }
 }
 
 const actuallizarImagenArtista = async (elemento, idArtists) => {
@@ -192,7 +206,7 @@ const actuallizarImagenArtista = async (elemento, idArtists) => {
         if(axiosPeticion.code === 200) {
             $(`#lightboxImagenArtista${idArtists}`).attr('href', axiosPeticion.url);
         } else {
-            showSwalError(axiosPeticion.error);
+            showToastify(axiosPeticion.error);
         }
     }
 }
@@ -230,7 +244,7 @@ const actualizarOrdenArtistas = async (elementos) => {
     }
     const data = { array: arregloArtistas };
     const axiosPeticion = await peticionAxios('PUT', '/artists/super-admin/update-order', data);
-    if(axiosPeticion.code !== 200) showSwalError(axiosPeticion.error);
+    if(axiosPeticion.code !== 200) showToastify(axiosPeticion.error);
 }
 
 /////////////////////////////////
@@ -244,8 +258,9 @@ const limpiarModalMultimedia = () => {
 
 const agregarMultimedia = async () => {
     let imagen = document.getElementById('imagenVideoMultimedia').files[0];
-    if(tieneDatos(imagen, 'La imagen o video')) {
-        showSwalLoading();
+    if(tieneDatos(imagen, 'La imagen')) {
+        let btn = $('#btnAgregarMultimedia');
+        btn.html('<span class="spinner-border" role="status" aria-hidden="true"></span>').prop('disabled', true);
         let formData = new FormData();
         formData.append('image', imagen);
         const axiosPeticion = await peticionAxios('POST', '/multimedia/super-admin/add', formData, true);
@@ -258,43 +273,36 @@ const agregarMultimedia = async () => {
                         <img class="card-img-top cursor-pointer" src="${multimedia.image}">
                     </a>
                     <div class="card-body">
-                        <i class="fa-solid fa-trash text-danger cursor-pointer" onclick="eliminarMultimedia('${multimedia.id}')"></i>
+                        <i class="fa-solid fa-trash text-danger cursor-pointer" onclick="mostrarModalEliminarMultimedia('${multimedia.id}')"></i>
                     </div>
                 </div>
             </div>`;
             $('#divContenidoMultimedia').prepend(html);
             limpiarModalMultimedia();
-            showSwalSuccess('Imagen agregada correctamente.');
+            showToastify('Imagen agregada correctamente.', '#4caf50');
             renderLightbox('.clase-' + timestamp);
         } else {
-            showSwalError(axiosPeticion.error);
+            showToastify(axiosPeticion.error);
         }
+        btn.html('AGREGAR').prop('disabled', false);
     }
 }
 
+const mostrarModalEliminarMultimedia = (idMultimedia) => {
+    $('#tituloEliminar').html(`¿Estas seguro de que quieres eliminar la imagen?`,);
+    $('#btnEliminarModal').attr('onclick','eliminarMultimedia("'+idMultimedia+'")');
+    $('#modalConfirmarEliminar').modal('show');
+}
+
 const eliminarMultimedia = async (idMultimedia) => {
-    Swal.fire({
-        text: `¿Estas seguro de que quieres eliminar la imagen?`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#000',
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar',
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        allowEnterKey: false
-    }).then(async (result) => {
-        if(result.isConfirmed) {
-            showSwalLoading();
-            const data = { idMultimedia };
-            const axiosPeticion = await peticionAxios('DELETE', '/multimedia/super-admin/delete', data);
-            if(axiosPeticion.code === 200) {
-                eliminarRow(idMultimedia);
-                showSwalSuccess('Imagen eliminada correctamente.');
-            } else {
-                showSwalError(axiosPeticion.error);
-            }
-        }
-    });
+    eliminarRow(idMultimedia);
+    const data = {
+        idMultimedia
+    };
+    const axiosPeticion = await peticionAxios('DELETE', '/multimedia/super-admin/delete', data);
+    if(axiosPeticion.code === 200) {
+        showToastify('Imagen eliminada correctamente.', '#4caf50');
+    } else {
+        showToastify(axiosPeticion.error);
+    }
 }

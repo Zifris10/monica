@@ -23,17 +23,19 @@ const cambiarVentana = (ventana) => {
 const olvideContrasena = async () => {
     let email = $('#correoOlvidePass').val().trim();
     if(tieneDatos(email, 'El correo') && esCorreo(email, 'El correo')) {
-        showSwalLoading();
-        let data = {
+        let btn = $('#btnOlvidePass');
+        btn.html('<span class="spinner-border text-primary" role="status" aria-hidden="true"></span>').prop('disabled', true);
+        const data = {
             email
         }
-        let axiosPeticion = await peticionAxios('POST', '/users/super-admin/forgot-password', data);
+        const axiosPeticion = await peticionAxios('POST', '/users/super-admin/forgot-password', data);
         if(axiosPeticion.code === 200) {
-            showSwalSuccess('Revisa tu correo y da click en el enlace para poder actualizar tu contraseña.');
+            showToastify('Revisa tu correo y da click en el enlace para poder actualizar tu contraseña.', '#4caf50');
             cambiarVentana('iniciar');
         } else {
-            showSwalError(axiosPeticion.error);
+            showToastify(axiosPeticion.error);
         }
+        btn.html('Enviar correo').prop('disabled', false);
     }
 }
 
@@ -41,38 +43,40 @@ const iniciarSesion = async () => {
     let email = $('#correoLogin').val().trim();
     let password = $('#passLogin').val();
     if(tieneDatos(email, 'El correo') && esCorreo(email, 'El correo') && tieneDatos(password, 'La contraseña')) {
-        showSwalLoading();
-        let data = {
+        let btn = $('#btnIniciarSesion');
+        btn.html('<span class="spinner-border text-primary" role="status" aria-hidden="true"></span>').prop('disabled', true);
+        const data = {
             email,
             password
         }
-        let axiosPeticion = await peticionAxios('POST', '/super-admin/login', data);
+        const axiosPeticion = await peticionAxios('POST', '/super-admin/login', data);
         if(axiosPeticion.code === 200) {
             localStorage.setItem('tokenMonica', axiosPeticion.token);
             location.href = '/dashboard-super-admin#generales';
         } else {
-            showSwalError(axiosPeticion.error);
+            showToastify(axiosPeticion.error);
         }
+        btn.html('Iniciar Sesión').prop('disabled', false);
     }
 }
 
 const actualizarContrasena = async () => {
     let password = $('#nuevaContrasena').val().trim();
     if(tieneDatos(password, 'La nueva contraseña')) {
-        showSwalLoading();
-        let queryString = location.search;
-        let urlParams = new URLSearchParams(queryString);
-        let token = urlParams.get('token');
-        let data = {
+        let btn = $('#btnActualizarPass');
+        btn.html('<span class="spinner-border text-primary" role="status" aria-hidden="true"></span>').prop('disabled', true);
+        const urlParams = new URLSearchParams(location.search);
+        const token = urlParams.get('token');
+        const data = {
             password,
             token
         }
-        let axiosPeticion = await peticionAxios('PUT', '/users/super-admin/update-password', data);
+        const axiosPeticion = await peticionAxios('PUT', '/users/super-admin/update-password', data);
         if(axiosPeticion.code === 200) {
             localStorage.setItem('tokenMonica', axiosPeticion.token);
             location.href = '/dashboard-super-admin#generales';
         } else {
-            showSwalError(axiosPeticion.error);
+            showToastify(axiosPeticion.error);
         }
     }
 }

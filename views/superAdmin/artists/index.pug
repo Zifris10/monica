@@ -28,7 +28,7 @@
                     th.pt-3
                         input.form-check-input(type='checkbox' checked=val.visible onchange='actualizarArtista("'+val.id+'",this.checked,"visible")')
                     th.pt-3
-                        i.fa-solid.fa-trash.text-danger.cursor-pointer(onclick='eliminarArtista("'+val.id+'","'+val.name+'")')
+                        i.fa-solid.fa-trash.text-danger.cursor-pointer(onclick='mostrarModalEliminarArtista("'+val.id+'","'+val.name+'")')
 .modal.fade#modalAgregarArtista(tabindex='-1' aria-hidden='true' data-bs-backdrop='static' data-bs-keyboard='false')
     .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
         .modal-content
@@ -48,4 +48,4 @@
                     .form-text La imagen no debe pesar más de 1MB.
                     input.d-none#imagenArtista(type='file' accept='.jpg, .jpeg, .png' onchange='setNombreArchivoInput(this,"inputImagenArtista")')
                 .text-end
-                    button.btn.bg-azul.text-white.size-input-button(onclick='agregarArtista()') AGREGAR
+                    button.btn.bg-azul.text-white.size-input-button#btnAgregarArtista(onclick='agregarArtista()') AGREGAR

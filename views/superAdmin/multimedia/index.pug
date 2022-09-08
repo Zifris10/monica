@@ -8,21 +8,21 @@
                 a.lightbox-toggle-multimedia(href=val.image)
                     img.card-img-top.cursor-pointer(src=val.image)
                 .card-body
-                    i.fa-solid.fa-trash.text-danger.cursor-pointer(onclick='eliminarMultimedia("'+val.id+'")')
+                    i.fa-solid.fa-trash.text-danger.cursor-pointer(onclick='mostrarModalEliminarMultimedia("'+val.id+'")')
 .modal.fade#modalAgregarMultimedia(tabindex='-1' aria-hidden='true' data-bs-backdrop='static' data-bs-keyboard='false')
     .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
         .modal-content
             .modal-header.bg-azul.border-0
-                h5.text-white.modal-title Nueva foto o video
+                h5.text-white.modal-title Nueva foto
                 i.fas.fa-times.text-white.cursor-pointer.font-25(onclick='limpiarModalMultimedia()')
             .modal-body
                 .mb-4
-                    label.form-label(for='imagenVideoMultimedia') Imagen / Video
+                    label.form-label(for='imagenVideoMultimedia') Imagen
                     .input-group
                         label.input-group-text.cursor-pointer.bg-azul.border-0(for='imagenVideoMultimedia')
                             i.fa-solid.fa-camera.mx-2.text-white
-                        input.form-control.input-style.text-secondary.size-input-button#inputImagenVideoMultimedia(type='text' placeholder='Imagen / Video' readOnly)
+                        input.form-control.input-style.text-secondary.size-input-button#inputImagenVideoMultimedia(type='text' placeholder='Imagen' readOnly)
                     .form-text La imagen no debe pesar más de 1MB.
                     input.d-none#imagenVideoMultimedia(type='file' accept='.jpg, .jpeg, .png' onchange='setNombreArchivoInput(this,"inputImagenVideoMultimedia")')
                 .text-end
-                    button.btn.bg-azul.text-white.size-input-button(onclick='agregarMultimedia()') AGREGAR
+                    button.btn.bg-azul.text-white.size-input-button#btnAgregarMultimedia(onclick='agregarMultimedia()') AGREGAR

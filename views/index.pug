@@ -4,6 +4,7 @@ html(lang='es')
         meta(charset='utf-8')      
         meta(name='viewport' content='width=device-width, initial-scale=1')
         link(rel='stylesheet' href='bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet' href='toastify/toastify.css')
         link(rel='stylesheet' href='stylesheets/index.css')
         link(rel='icon' href='images/logo.png')
         title Iniciar sesión
@@ -20,19 +21,19 @@ html(lang='es')
                     input.form-control.input-style.text-secondary#passLogin(type='password' placeholder='Contraseña' autocomplete='off')
                 .text-end.mb-5
                     a.cursor-pointer(onclick="cambiarVentana('olvide')") ¿Olvidaste tu contraseña?
-                button.btn.btn-iniciar-sesion.col-12.text-white.mb-3(onclick='iniciarSesion()') Iniciar Sesión
+                button.btn.btn-iniciar-sesion.col-12.text-white.mb-3#btnIniciarSesion(onclick='iniciarSesion()') Iniciar Sesión
             .myForm.px-4.bg-white#divOlvidePass
                 .text-center.mb-3
                     img.mt-3(src='images/logo.png' width=150)
                 .mb-5
                     label.form-label(for='correoOlvidePass') Correo
                     input.form-control.input-style.text-secondary#correoOlvidePass(type='text' placeholder='Correo' autocomplete='off')
-                button.btn.btn-iniciar-sesion.col-12.text-white.mb-3(onclick='olvideContrasena()') Enviar correo
+                button.btn.btn-iniciar-sesion.col-12.text-white.mb-3#btnOlvidePass(onclick='olvideContrasena()') Enviar correo
                 .text-center.mb-3
                     a.cursor-pointer(onclick="cambiarVentana('iniciar')") Iniciar sesión
         script(src='jquery/jquery-3.6.0.min.js')
         script(src='bootstrap/js/bootstrap.min.js')
         script(src='axios/axios.min.js')
-        script(src='sweetalert/sweetalert2.all.min.js')
+        script(src='toastify/toastify.js')
         script(src='javascripts/funcionesGenerales.js')
         script(src='javascripts/index.js')

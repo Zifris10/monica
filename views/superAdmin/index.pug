@@ -5,6 +5,7 @@ html(lang='es')
         meta(name='viewport' content='width=device-width, initial-scale=1')
         link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css')
         link(rel='stylesheet' href='bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet' href='toastify/toastify.css')
         link(rel='stylesheet' href='stylesheets/style.css')
         link(rel='icon' href='images/logo.png')
         title Representaciones Artísticas
@@ -26,7 +27,7 @@ html(lang='es')
                     label.form-label(for='emailPerfil') Correo
                     input.form-control.input-style.text-secondary.size-input-button#emailPerfil(type='text' placeholder='Correo')
                 .mb-3
-                    button.btn.bg-azul.col-12.text-white.size-input-button(onclick='actualizarPerfil()') ACTUALIZAR
+                    button.btn.bg-azul.col-12.text-white.size-input-button#btnActualizarPerfil(onclick='actualizarPerfil()') ACTUALIZAR
         .offcanvas.offcanvas-start.size-off-canvas#offCanvasSidenav(tabindex='-1')
             .offcanvas-body.bg-white
                 .text-center.mb-4
@@ -57,11 +58,23 @@ html(lang='es')
                     .col-9
                         span.font-15.text-secondary Cerrar Sesión
         #divContenido.container-fluid.mt-4
+        .modal.fade#modalConfirmarEliminar(tabindex='-1' aria-hidden='true' data-bs-backdrop='static' data-bs-keyboard='false')
+            .modal-dialog.modal-dialog-centered
+                .modal-content
+                    .modal-body
+                        .row
+                            .col-12.text-center.mb-4
+                                p.font-17.fw-bold#tituloEliminar
+                            .col-12.text-center
+                                button.btn.btn-danger.fw-bold.size-input-button.me-2#btnEliminarModal(data-bs-dismiss='modal')
+                                    | ELIMINAR
+                                button.btn.btn-secondary.fw-bold.size-input-button(data-bs-dismiss='modal')
+                                    | CANCELAR
         script(src='jquery/jquery-3.6.0.min.js')
         script(src='bootstrap/js/bootstrap.min.js')
         script(src='bootstrapLightbox/index.bundle.min.js')
         script(src='axios/axios.min.js')
-        script(src='sweetalert/sweetalert2.all.min.js')
+        script(src='toastify/toastify.js')
         script(src='sortablejs/Sortable.min.js')
         script(src='javascripts/funcionesGenerales.js')
         script(src='javascripts/superAdmin.js')
