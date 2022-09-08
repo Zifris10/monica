@@ -1,6 +1,6 @@
 const cron = require('node-cron');
 const { Op } = require('sequelize');
-const { visitCount } = require('../controllers/visitsController');
+const { visitCount } = require('../models/Visitas');
 const { superAdminGetAll } = require('../controllers/superAdminsController');
 const { emailTotalVisitsEachMonth } = require('../helpers/emails');
 const logger = require('../helpers/winston');
