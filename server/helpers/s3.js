@@ -20,6 +20,7 @@ const uploadFileS3 = (filePath, content) => {
         };
         s3Config.upload(parameters, (error, response) => {
             if (error) {
+                logger.log({ level: 'error', message: error.message, functionName: 'uploadFileS3' });
                 reject({ code: 500, error: 'Ocurrió un error al intentar guardar el archivo en el repositorio S3 de Amazon.' });
             } else {
                 resolve({ code: 200, url: response.Location });

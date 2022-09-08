@@ -1,5 +1,6 @@
 const { convertPugFile } = require('./pug');
 const { createTransport } = require('nodemailer');
+const logger = require('./winston');
 const transporter = createTransport({
     host: process.env.AWS_SES_HOST,
     port: parseInt(process.env.AWS_SES_PORT),
@@ -25,6 +26,7 @@ const emailForgotPassword = async (data) => {
         const send = await sendMail(mailOptions);
         return send;
     } catch (error) {
+        logger.log({ level: 'error', message: error.message, functionName: 'emailForgotPassword', data });
         return { code: 500, error: 'Lo sentimos, pero ocurrió un error al intentar enviar el email.' };
     }
 };
@@ -38,10 +40,9 @@ const emailUpdatePassword = async (data) => {
             subject: 'Contraseña actualizada',
             html: pug.html
         };
-        const send = await sendMail(mailOptions);
-        return send;
+        sendMail(mailOptions);
     } catch (error) {
-        return { code: 500, error: 'Lo sentimos, pero ocurrió un error al intentar enviar el email.' };
+        logger.log({ level: 'error', message: error.message, functionName: 'emailUpdatePassword', data });
     }
 };
 
@@ -55,10 +56,9 @@ const emailTotalVisitsEachMonth = async (data) => {
             subject: 'Total de visitas',
             html: pug.html
         };
-        const send = await sendMail(mailOptions);
-        return send;
+        sendMail(mailOptions);
     } catch (error) {
-        return { code: 500, error: 'Lo sentimos, pero ocurrió un error al intentar enviar el email.' };
+        logger.log({ level: 'error', message: error.message, functionName: 'emailTotalVisitsEachMonth', data });
     }
 };
 
@@ -68,6 +68,7 @@ const sendMail = async (mailOptions) => {
         await transporter.sendMail(mailOptions);
         return { code: 200 };
     } catch (error) {
+        logger.log({ level: 'error', message: error.message, functionName: 'sendMail', mailOptions });
         return { code: 500, error: 'Lo sentimos, pero ocurrió un error al intentar enviar el email.' };
     }
 };
