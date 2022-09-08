@@ -4,6 +4,7 @@ html(lang='es')
         meta(charset='utf-8')      
         meta(name='viewport' content='width=device-width, initial-scale=1')
         link(rel='stylesheet' href='bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet' href='toastify/toastify.css')
         link(rel='stylesheet' href='stylesheets/principal.css')
         link(rel='icon' href='images/logo.png')
         title Representaciones Artísticas
@@ -12,8 +13,6 @@ html(lang='es')
             .container-fluid
                 a.navbar-brand(data-bs-toggle='offcanvas' href='#offCanvasSidenav')
                     img(src='images/logo.png' width=50)
-                .d-flex
-                    a.font-17.text-dark#nombreNavbar(data-bs-toggle='offcanvas' href='#offCanvasPerfil')
         .container.mb-5
             .row
                 .col-12.text-center
@@ -100,6 +99,6 @@ html(lang='es')
         script(src='axios/axios.min.js')
         script(src='bootstrap/js/bootstrap.min.js')
         script(src='bootstrapLightbox/index.bundle.min.js')
-        script(src='sweetalert/sweetalert2.all.min.js')
+        script(src='toastify/toastify.js')
         script(src='javascripts/funcionesGenerales.js')
         script(src='javascripts/principal.js')
